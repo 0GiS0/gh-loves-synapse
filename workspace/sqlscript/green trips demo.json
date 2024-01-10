@@ -1,0 +1,17 @@
+{
+	"name": "green trips demo",
+	"properties": {
+		"content": {
+			"query": "SELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'https://storageforsynapsegis.blob.core.windows.net/users/green_tripdata_2023-01.parquet',\n        FORMAT='PARQUET'\n    ) AS [result]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
