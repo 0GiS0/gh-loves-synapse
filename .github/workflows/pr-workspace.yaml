@@ -11,8 +11,8 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
 
 permissions:
-  pull-requests: write # for commenting on PRs    
-
+  pull-requests: write # for commenting on PRs
+  
 jobs:
   terraform:
     name: 'Terraform'
