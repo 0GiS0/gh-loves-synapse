@@ -27,3 +27,9 @@ variable "home_ip" {
   default     = ""
   description = "Home IP address"
 }
+
+variable "github_handler" {
+  type        = string
+  default     = "0GiS0"
+  description = "Github handler"
+}
