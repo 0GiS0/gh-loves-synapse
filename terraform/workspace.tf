@@ -24,6 +24,6 @@ data "http" "current_public_ip" {
 resource "azurerm_synapse_firewall_rule" "allow_all" {
   name                 = "allow_from_home"
   synapse_workspace_id = azurerm_synapse_workspace.workspace.id
-  start_ip_address     = data.http.current_public_ip.response_body
-  end_ip_address       = data.http.current_public_ip.response_body
+  start_ip_address     = var.home_ip != "" ? var.home_ip : data.http.current_public_ip.response_body
+  end_ip_address       = var.home_ip != "" ? var.home_ip : data.http.current_public_ip.response_body
 }

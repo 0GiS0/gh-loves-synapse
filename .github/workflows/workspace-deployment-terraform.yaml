@@ -38,4 +38,7 @@ jobs:
           run: terraform plan
 
         - name: Terraform Apply
-          run: terraform apply -auto-approve
+          run: | 
+            terraform apply \
+            -var="home_ip=${{ secrets.HOME_IP }}" \
+            -auto-approve

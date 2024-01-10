@@ -21,3 +21,9 @@ variable "sql_administrator_login_password" {
   default     = "H@Sh1CoR3!"
   description = "SQL administrator login password"
 }
+
+variable "home_ip" {
+  type        = string
+  default     = ""
+  description = "Home IP address"
+}
