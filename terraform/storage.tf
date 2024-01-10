@@ -17,3 +17,12 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "filesystem" {
   storage_account_id = azurerm_storage_account.storage.id
 }
 
+# Upload a parquet file to the storage account
+resource "azurerm_storage_blob" "file" {
+  name                   = "green_tripdata_2023-01.parquet"
+  storage_account_name   = azurerm_storage_account.storage.name
+  storage_container_name = azurerm_storage_data_lake_gen2_filesystem.filesystem.name
+  type                   = "Block"
+  source                 = "../data/green_tripdata_2023-01.parquet"
+  depends_on             = [azurerm_storage_data_lake_gen2_filesystem.filesystem]
+}
