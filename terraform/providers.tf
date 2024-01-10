@@ -1,7 +1,10 @@
 provider "azurerm"{
    features{
     resource_group {
-        purge_soft_delete_on_destroy = true
+         prevent_deletion_if_contains_resources = false
     }
    } 
+}
+
+provider "random" {
 }

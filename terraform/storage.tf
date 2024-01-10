@@ -1,3 +1,7 @@
+resource "random_id" "storage" {
+  byte_length = 2
+}
+
 resource "azurerm_storage_account" "storage" {
   name                     = "${var.env_prefix}storage${random_id.storage.dec}"
   resource_group_name      = azurerm_resource_group.rg.name
@@ -13,27 +17,3 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "filesystem" {
   storage_account_id = azurerm_storage_account.storage.id
 }
 
-resource "azurerm_synapse_workspace" "workspace" {
-  name                                 = "example"
-  resource_group_name                  = azurerm_resource_group.rg.name
-  location                             = azurerm_resource_group.rg.location
-  storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.filesystem.id
-  sql_administrator_login              = "sqladminuser"
-  sql_administrator_login_password     = "H@Sh1CoR3!"  
-
-  identity {
-    type = "SystemAssigned"
-  }  
-}
-
-data "http" "current_public_ip" {
-  url = "https://ipinfo.io/ip"
-}
-
-# firewall rules
-resource "azurerm_synapse_firewall_rule" "allow_all" {
-  name                = "allow_from_home"
-  synapse_workspace_id = azurerm_synapse_workspace.workspace.id  
-  start_ip_address    = data.http.current_public_ip.body
-    end_ip_address      = data.http.current_public_ip.body
-}
