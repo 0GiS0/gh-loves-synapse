@@ -15,17 +15,17 @@ resource "azurerm_synapse_workspace" "workspace" {
   # if env_prefix is equal to dev, then we configure git integration
 
   
-    # You must log in to the Synapse UI to complete the authentication to the GitHub Repository
-  github_repo {
+  # You must log in to the Synapse UI to complete the authentication to the GitHub Repository
+
+  dynamic "git_integration" {
+    for_each = var.env_prefix == "dev" ? [1] : []
+    content {
       account_name = var.github_account_name
       branch_name  = var.github_branch_name
       repository_name = var.github_repository_name
       root_folder = var.github_root_folder
-
+    }
   }
- 
-
-
 
   identity {
     type = "SystemAssigned"
