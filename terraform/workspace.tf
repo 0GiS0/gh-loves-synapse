@@ -17,7 +17,7 @@ resource "azurerm_synapse_workspace" "workspace" {
   
   # You must log in to the Synapse UI to complete the authentication to the GitHub Repository
 
-  dynamic "git_integration" {
+  dynamic "github_repo" {
     for_each = var.env_prefix == "dev" ? [1] : []
     content {
       account_name = var.github_account_name
