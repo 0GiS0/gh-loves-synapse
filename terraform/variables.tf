@@ -48,6 +48,6 @@ variable "github_repository_name"{
 
 variable "github_root_folder"{
   type        = string
-  default     = "workspace"
+  default     = "/workspace"
   description = "Github root folder"
 }
