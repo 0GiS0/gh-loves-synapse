@@ -14,16 +14,16 @@ resource "azurerm_synapse_workspace" "workspace" {
   # only applies if env_prefix is equal to dev
   # if env_prefix is equal to dev, then we configure git integration
 
-  if var.env_prefix == "dev" {
+
     # You must log in to the Synapse UI to complete the authentication to the GitHub Repository
     github_repo {
-      account_name = var.github_account_name
-      branch_name  = var.github_branch_name
-      repository_name = var.github_repository_name
-      root_folder = var.github_root_folder
+      account_name = var.env_prefix == "dev" ? var.github_account_name : ""
+      branch_name  = var.env_prefix == "dev" ? var.github_branch_name  : ""
+      repository_name = var.env_prefix == "dev" ? var.github_repository_name : ""
+      root_folder = var.env_prefix == "dev" ? var.github_root_folder: ""
 
     }
-  }
+  
 
 
 
