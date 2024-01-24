@@ -5,6 +5,8 @@ resource "azurerm_synapse_spark_pool" "spark_pool" {
 
     node_size_family     = "MemoryOptimized"
     node_size            = "Small"
-    cache_size           = 100  
+    cache_size           = 100
+
+    node_count           = 1
 
 }
