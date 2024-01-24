@@ -11,6 +11,22 @@ resource "azurerm_synapse_workspace" "workspace" {
   sql_administrator_login              = var.sql_administrator_login
   sql_administrator_login_password     = var.sql_administrator_login_password
 
+  # only applies if env_prefix is equal to dev
+  # if env_prefix is equal to dev, then we configure git integration
+
+  if var.env_prefix == "dev" {
+    # You must log in to the Synapse UI to complete the authentication to the GitHub Repository
+    github_repo {
+      account_name = var.github_account_name
+      branch_name  = var.github_branch_name
+      repository_name = var.github_repository_name
+      root_folder = var.github_root_folder
+
+    }
+  }
+
+
+
   identity {
     type = "SystemAssigned"
   }
