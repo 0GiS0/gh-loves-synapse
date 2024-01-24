@@ -3,6 +3,9 @@ name: Destroy environment
 on: 
     workflow_dispatch:
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}  
+
 jobs:
     destroy:
         runs-on: ubuntu-latest
