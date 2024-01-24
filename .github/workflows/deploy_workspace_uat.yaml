@@ -1,8 +1,8 @@
-name: 'Terraform GitHub Actions'
+name: 'UAT environment'
 on:
-    push:
-        branches:
-            - dev
+  push:
+    branches:
+    - uat
 
 env:
     ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
@@ -35,10 +35,13 @@ jobs:
           run: terraform validate
 
         - name: Terraform Plan
-          run: terraform plan
+          run: | 
+            terraform plan \            
+            -var="env_prefix=uat"
 
         - name: Terraform Apply
           run: | 
             terraform apply \
+            -var="env_prefix=uat" \
             -var="home_ip=${{ secrets.HOME_IP }}" \
             -auto-approve
