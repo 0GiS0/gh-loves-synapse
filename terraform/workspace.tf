@@ -17,10 +17,10 @@ resource "azurerm_synapse_workspace" "workspace" {
 
     # You must log in to the Synapse UI to complete the authentication to the GitHub Repository
     github_repo {
-      account_name = var.env_prefix == "dev" ? var.github_account_name : null
-      branch_name  = var.env_prefix == "dev" ? var.github_branch_name  : null
-      repository_name = var.env_prefix == "dev" ? var.github_repository_name : null
-      root_folder = var.env_prefix == "dev" ? var.github_root_folder: null
+      account_name = try(var.env_prefix == "dev" ? var.github_account_name, null)
+      branch_name  = try(var.env_prefix == "dev" ? var.github_branch_name, null)
+      repository_name = try(var.env_prefix == "dev" ? var.github_repository_name, null)
+      root_folder = try(var.env_prefix == "dev" ? var.github_root_folder, null)
 
     }
   
