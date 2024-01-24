@@ -30,24 +30,24 @@ variable "home_ip" {
 
 variable "github_account_name" {
   type        = string
-  # default     = "0GiS0"
+  default     = null
   description = "Github handler"
 }
 
 variable "github_branch_name"{
   type        = string
-  # default     = "test"
+  default     = null
   description = "Github branch"
 }
 
 variable "github_repository_name"{
   type        = string
-  # default     = "gh-loves-synapse"
+  default     = null
   description = "Github repository"
 }
 
 variable "github_root_folder"{
   type        = string
-  # default     = "/workspace"
+  default     = null
   description = "Github root folder"
 }
