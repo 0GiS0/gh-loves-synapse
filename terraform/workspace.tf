@@ -43,3 +43,10 @@ resource "azurerm_synapse_firewall_rule" "allow_all" {
   start_ip_address     = var.home_ip != "" ? var.home_ip : data.http.current_public_ip.response_body
   end_ip_address       = var.home_ip != "" ? var.home_ip : data.http.current_public_ip.response_body
 }
+
+resource "azurerm_synapse_firewall_rule" "allow_azure_services" {
+  name                 = "AllowAllWindowsAzureIps"
+  synapse_workspace_id = azurerm_synapse_workspace.workspace.id
+  start_ip_address     = "0.0.0.0"
+  end_ip_address       = "0.0.0.0"
+}

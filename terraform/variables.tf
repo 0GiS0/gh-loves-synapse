@@ -51,3 +51,9 @@ variable "github_root_folder"{
   default     = null
   description = "Github root folder"
 }
+
+variable "user_object_id"{
+  type        = string
+  default     = "7b040292-9428-43b5-91a1-031d3d8b5427"
+  description = "User object id"
+}
