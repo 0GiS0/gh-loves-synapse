@@ -30,7 +30,11 @@ jobs:
             -backend-config="container_name=${{ secrets.CONTAINER_NAME }}" \
             -backend-config="access_key=${{ secrets.ACCESS_KEY }}" \
             -backend-config="key=${{ secrets.DEV_KEY }}" \
-            -backend-config="resource_group_name=${{ secrets.RESOURCE_GROUP_NAME }}"
+            -backend-config="resource_group_name=${{ secrets.RESOURCE_GROUP_NAME }}" \
+            -var="github_account_name=${{ github.repository_owner }}" \
+            -var="github_branch_name=main" \
+            -var="github_repository_name=gh-loves-synapse" \
+            -var="github_root_folder=/"
         - name: Terraform Validate
           run: terraform validate
 
@@ -41,4 +45,8 @@ jobs:
           run: | 
             terraform apply \
             -var="home_ip=${{ secrets.HOME_IP }}" \
+            -var="github_account_name=${{ github.repository_owner }}" \
+            -var="github_branch_name=main" \
+            -var="github_repository_name=gh-loves-synapse" \
+            -var="github_root_folder=/"
             -auto-approve
