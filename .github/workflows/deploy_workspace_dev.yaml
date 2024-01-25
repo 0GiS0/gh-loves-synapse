@@ -35,7 +35,10 @@ jobs:
           run: terraform validate
 
         - name: Terraform Plan
-          run: terraform plan 
+          run: terraform plan -var "github_account_name=${{ github.repository_owner }}" \
+            -var "github_branch_name=main" \
+            -var "github_repository_name=gh-loves-synapse" \
+            -var "github_root_folder=/"
 
         - name: Terraform Apply
           run: | 
