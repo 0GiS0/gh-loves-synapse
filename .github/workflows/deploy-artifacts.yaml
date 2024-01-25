@@ -1,0 +1,28 @@
+name: workspace deployment
+
+on:
+    push:
+        branches: [ workspace_publish ]
+jobs:
+    release:
+        # You also can use the self-hosted runners.
+        runs-on: windows-latest
+        steps:
+        # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
+        - uses: actions/checkout@v4
+        - uses: azure/synapse-workspace-deployment@V1.8.0
+          with:
+              #TargetWorkspaceName: 'synapse-from-portal'
+              #resourceGroup: 'synapse-from-portal'
+              TargetWorkspaceName: 'uat-synapse-wkspc'
+              resourceGroup: 'uat-synapse-rg'
+              TemplateFile: './dev-synapse-wkspc/TemplateForWorkspace.json'
+              ParametersFile: './dev-synapse-wkspc/TemplateParametersForWorkspace.json'
+              #OverrideArmParameters: './path of the parameters.yaml'
+              environment: 'Azure Public'          
+              clientId: ${{secrets.ARM_CLIENT_ID}}
+              clientSecret:  ${{secrets.ARM_CLIENT_SECRET}}
+              subscriptionId: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+              tenantId: ${{ secrets.ARM_TENANT_ID }}
+              DeleteArtifactsNotInTemplate: 'true'              
+              operation: 'deploy'
