@@ -1,1 +1,1 @@
-Initialized by Azure Synapse Workspace!
+# This branch is for Synapse Artifacts
